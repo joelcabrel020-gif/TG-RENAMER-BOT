@@ -4,6 +4,7 @@ logger = logging.getLogger(__name__)
 import os
 import time
 import random
+import asyncio
 from ..config import Config
 from ..tools.text import TEXT
 from ..tools.progress_bar import progress_bar, take_screen_shot
@@ -14,7 +15,6 @@ from hachoir.parser import createParser
 from ..database.database import *
 from pyrogram import Client as RenamerNs, filters
 from pyrogram.errors import PeerIdInvalid, ChannelInvalid, FloodWait
-from pyrogram.emoji import *
 
 
 @RenamerNs.on_message((filters.document|filters.video) & filters.private & filters.incoming)
@@ -93,7 +93,6 @@ async def media(c, m):
         duration = 0
 
     thumbnail_location = f"{Config.DOWNLOAD_LOCATION}/{m.from_user.id}.jpg"
-    # if thumbnail not exists checking the database for thumbnail
     if not os.path.exists(thumbnail_location):
         thumb_id = (await get_data(m.from_user.id)).thumb_id
 
@@ -159,11 +158,11 @@ async def media(c, m):
     try:
         await send_message.edit(TEXT.UPLOAD_SUCESS, disable_web_page_preview=True)
         if trace_msg:
-            await trace_msg.edit(f'**User Name:** {m.from_user.mention(style="md")}\n\n**User Id:** `{m.from_user.id}`\n\n**New File Name:** `{new_file_name}`\n\n**Status:** Uploaded Sucessfully {CHECK_MARK_BUTTON}')
+            await trace_msg.edit(f'**User Name:** {m.from_user.mention(style="md")}\n\n**User Id:** `{m.from_user.id}`\n\n**New File Name:** `{new_file_name}`\n\n**Status:** Uploaded Sucessfully ✅')
         os.remove(new_file_location)
     except:
         pass
 
 async def notify(m, time_gap):
     await asyncio.sleep(time_gap)
-    await m.reply_text("__You can use me Now__")
+    await m.reply_text("__You can use me Now__")    

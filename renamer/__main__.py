@@ -11,7 +11,8 @@ logging.getLogger().setLevel(logging.WARNING)
 import platform
 import asyncio
 from .config import Config
-from pyrogram import Client, __version__, idle
+from pyromod import Client
+from pyrogram import __version__, idle
 
 
 async def main():

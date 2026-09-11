@@ -5,3 +5,4 @@ APScheduler
 hachoir
 psycopg2-binary
 SQLAlchemy==1.3.23
+Pillow

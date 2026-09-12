@@ -37,7 +37,6 @@ async def media(c, m):
 
     file_name = await c.ask(chat_id=m.from_user.id, text="Send me the New FileName for this file or send /cancel to stop", filters=filters.text)
     await file_name.delete()
-    await file_name.request.delete()
     new_file_name = file_name.text
     if new_file_name.lower() == "/cancel":
         await m.delete()
@@ -165,4 +164,4 @@ async def media(c, m):
 
 async def notify(m, time_gap):
     await asyncio.sleep(time_gap)
-    await m.reply_text("__You can use me Now__")    
+    await m.reply_text("__You can use me Now__")                    
